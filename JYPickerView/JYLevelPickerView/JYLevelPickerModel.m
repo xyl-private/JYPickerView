@@ -9,7 +9,22 @@
 #import "JYLevelPickerModel.h"
 
 @implementation JYLevelPickerModel
+// 返回容器类中的所需要存放的数据类型 (以 Class 或 Class Name 的形式)。
+//  YYModel 模型转换
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"dataList" : @"JYLevelPickerModel",
+             };
+}
 
+//  MJExtension 模型转换
++ (NSDictionary *)mj_objectClassInArray{
+    return @{
+             @"dataList" : @"JYLevelPickerModel"
+             };
+}
+
+// 测试数据
 + (NSArray *) dataSource{
     return @[
              @{

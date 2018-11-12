@@ -271,14 +271,12 @@ static const int DangerArea = 34;
     return _pickerView;
 }
 
-- (JYPickerToolBarView *)pickerToolBarView{
+- (JYLevelPickerToolBarView *)pickerToolBarView{
     if (_pickerToolBarView == nil) {
-        _pickerToolBarView = [[JYPickerToolBarView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), ToobarHeight) didConfirmDate:^(JYPickerToolBarViewButtonType type) {
-            if (type == JYPickerToolBarViewButtonTypeLeft) {
-                NSLog(@"左侧按钮");
+        _pickerToolBarView = [[JYLevelPickerToolBarView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), ToobarHeight) didConfirmDate:^(JYLevelPickerToolBarViewButtonType type) {
+            if (type == JYLevelPickerToolBarViewButtonTypeLeft) {
                 [self remove];
             }else{
-                NSLog(@"右侧按钮");
                 [self rightButtonClick];
             }
         }];

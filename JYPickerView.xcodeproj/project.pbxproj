@@ -11,6 +11,7 @@
 		7B050B602199173F00AE0D35 /* JYLevelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5A2199173F00AE0D35 /* JYLevelPickerView.m */; };
 		7B050B612199173F00AE0D35 /* JYLevelPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */; };
 		7B050B622199173F00AE0D35 /* JYLevelPickerTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */; };
+		7B050B862199634600AE0D35 /* JYLevelPickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B852199634600AE0D35 /* JYLevelPickerToolBarView.m */; };
 		7B0C9402219590F0005D7200 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C9401219590F0005D7200 /* AppDelegate.m */; };
 		7B0C9405219590F0005D7200 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C9404219590F0005D7200 /* ViewController.m */; };
 		7B0C9408219590F0005D7200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0C9406219590F0005D7200 /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 		7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerModel.m; sourceTree = "<group>"; };
 		7B050B5E2199173F00AE0D35 /* JYLevelPickerTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerTestModel.h; sourceTree = "<group>"; };
 		7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerTestModel.m; sourceTree = "<group>"; };
+		7B050B842199634600AE0D35 /* JYLevelPickerToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerToolBarView.h; sourceTree = "<group>"; };
+		7B050B852199634600AE0D35 /* JYLevelPickerToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerToolBarView.m; sourceTree = "<group>"; };
 		7B0C93FD219590F0005D7200 /* JYPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JYPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C9400219590F0005D7200 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7B0C9401219590F0005D7200 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 				7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */,
 				7B050B5B2199173F00AE0D35 /* JYLevelPickerView.h */,
 				7B050B5A2199173F00AE0D35 /* JYLevelPickerView.m */,
+				7B050B842199634600AE0D35 /* JYLevelPickerToolBarView.h */,
+				7B050B852199634600AE0D35 /* JYLevelPickerToolBarView.m */,
 			);
 			path = JYLevelPickerView;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				7B050B602199173F00AE0D35 /* JYLevelPickerView.m in Sources */,
 				7B050B622199173F00AE0D35 /* JYLevelPickerTestModel.m in Sources */,
 				7B0C9402219590F0005D7200 /* AppDelegate.m in Sources */,
+				7B050B862199634600AE0D35 /* JYLevelPickerToolBarView.m in Sources */,
 				7B0C942221959235005D7200 /* NSDate+JYPickerDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 //  二级选择器控件 支持 一二级的
 
 #import <UIKit/UIKit.h>
-#import "JYPickerToolBarView.h"
+#import "JYLevelPickerToolBarView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class JYLevelPickerView,JYLevelPickerModel;
@@ -30,7 +30,7 @@ typedef void (^LevelPickerChosseResultBlock)(JYLevelPickerModel * resultModel,JY
 /** 默认展示的code */
 @property (nonatomic, copy) NSString * defaultCode;
 /** picker Tool Bar View */
-@property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;
+@property (nonatomic, strong) JYLevelPickerToolBarView * pickerToolBarView;
 
 /** 设置 内容字体 */
 @property (nonatomic, strong) UIFont * contentTextFont;
