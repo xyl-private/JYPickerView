@@ -2,8 +2,8 @@
 //  JYDatePickerView.m
 //  DatePicker-Demo
 //
-//  Created by McIntosh on 2018/11/9.
-//  Copyright © 2018 ray. All rights reserved.
+//  Created by xyanl on 2018/11/9.
+//  Copyright © 2018 xyanl. All rights reserved.
 //
 
 #import "JYDatePickerView.h"
@@ -403,6 +403,8 @@ static CGFloat const kConfirmBtnHeight = 50;
     self.selectDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd", year, month, MIN(day, days.length), hour, minute] format:@"yyyy-MM-dd HH:mm"];
 }
 
-
+- (void)dealloc{
+    NSLog(@"----- JYDatePickerView ----- 销毁");
+}
 
 @end

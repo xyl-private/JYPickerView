@@ -2,7 +2,7 @@
 //  main.m
 //  JYPickerView
 //
-//  Created by McIntosh on 2018/11/9.
+//  Created by xyanl on 2018/11/9.
 //  Copyright © 2018 xyanl. All rights reserved.
 //
 

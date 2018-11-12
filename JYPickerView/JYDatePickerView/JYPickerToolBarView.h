@@ -2,8 +2,8 @@
 //  JYPickerToolBarView.h
 //  DatePicker-Demo
 //
-//  Created by McIntosh on 2018/11/9.
-//  Copyright © 2018 ray. All rights reserved.
+//  Created by xyanl on 2018/11/9.
+//  Copyright © 2018 xyanl. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
