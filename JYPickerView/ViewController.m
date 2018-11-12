@@ -57,7 +57,7 @@
 
     [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
         pickerView.defaultCode = self.addrCodeLabel.text;
-        pickerView.titleText = @"地址选择器";
+        pickerView.pickerToolBarView.titleText = @"地址选择器";
         pickerView.pickerToolBarView.isShowLine = YES;
         pickerView.pickerToolBarView.lineViewColor = [UIColor redColor];
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {

@@ -37,30 +37,6 @@ typedef void (^LevelPickerChosseResultBlock)(JYLevelPickerModel * resultModel,JY
 /** 设置 内容文本颜色 */
 @property (nonatomic, strong) UIColor * contentTextColor;
 
-
-/** 设置 标题文本 */
-@property (nonatomic, copy) NSString * titleText;
-/** 设置 标题文本颜色 */
-@property (nonatomic, strong) UIColor * titleTextColor;
-/** 设置 标题文本字体 */
-@property (nonatomic, strong) UIFont * titleTextFont;
-
-
-/** 设置 左侧按钮title */
-@property (nonatomic, copy) NSString * leftTitleText;
-/** 设置 左侧按钮文本颜色 */
-@property (nonatomic, strong) UIColor * leftTextColor;
-/** 设置 左侧按钮文本字体 */
-@property (nonatomic, strong) UIFont * leftTextFont;
-
-
-/** 设置 右侧按钮title */
-@property (nonatomic, copy) NSString * rightTitleText;
-/** 设置 右侧按钮文本颜色 */
-@property (nonatomic, strong) UIColor * rightTextColor;
-/** 设置 右侧按钮文本字体 */
-@property (nonatomic, strong) UIFont * rightTextFont;
-
 /** toolbar 的背景色 */
 @property (nonatomic, strong) UIColor * toolbarBackgroundColor;
 
