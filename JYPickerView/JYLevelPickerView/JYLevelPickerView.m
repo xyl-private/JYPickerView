@@ -8,7 +8,7 @@
 
 #import "JYLevelPickerView.h"
 #import "JYLevelPickerModel.h"
-#import "JYPickerToolBarView.h"
+
 #define IS_IPHONE_X ([UIScreen mainScreen].bounds.size.height == 812.0f) ? YES : NO
 
 static const int ToobarHeight = 44;
