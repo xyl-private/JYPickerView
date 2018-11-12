@@ -65,42 +65,6 @@ static CGFloat const kConfirmBtnHeight = 50;
     [datePick show];
 }
 
-
-- (void)show {
-    UIWindow *keyWindow = UIApplication.sharedApplication.keyWindow;
-    if (self.superview.superview == keyWindow) {
-        return;
-    }
-    UIView *container = [[UIView alloc] init];
-    container.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    [container addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
-    container.frame = keyWindow.bounds;
-    [container addSubview:self];
-    
-    JYPickerToolBarView * pickerToolBarView = [[JYPickerToolBarView alloc] initWithFrame:CGRectMake(0, self.frame.origin.y - kConfirmBtnHeight, CGRectGetWidth(self.frame), kConfirmBtnHeight) didConfirmDate:^(JYPickerToolBarViewButtonType type) {
-        if (type == JYPickerToolBarViewButtonTypeLeft) {
-            [self dismiss];
-            NSLog(@"左侧按钮");
-        }else{
-            [self didConfirm];
-            NSLog(@"右侧按钮");
-        }
-    }];
-    [container addSubview:pickerToolBarView];
-    [keyWindow addSubview:container];
-}
-
-- (void)dismiss {
-    [self.superview removeFromSuperview];
-}
-
-- (void)didConfirm{
-    if (nil != _confirmBlock) {
-        _confirmBlock(_selectDate);
-    }
-    [self dismiss];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame style:(JYDatePickerComponentsStyle)style confirmBlock:(void (^)(NSDate *date))confirmBlock {
     if (self = [super initWithFrame:frame]) {
         self.style = style;
@@ -113,87 +77,29 @@ static CGFloat const kConfirmBtnHeight = 50;
     return self;
 }
 
-- (NSDate *)minLimitDate {
-    if (nil == _minLimitDate) {
-        _minLimitDate = [NSDate dateWithStr:@"1900-01-01 00:00" format:@"yyyy-MM-dd HH:mm"];
+- (void)show {
+    UIWindow *keyWindow = UIApplication.sharedApplication.keyWindow;
+    if (self.superview.superview == keyWindow) {
+        return;
     }
-    return _minLimitDate;
+    UIView *container = [[UIView alloc] init];
+    container.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    [container addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+    container.frame = keyWindow.bounds;
+    [container addSubview:self];
+    [container addSubview:self.pickerToolBarView];
+    [keyWindow addSubview:container];
 }
 
-- (void)setMinLimitDate:(NSDate *)minLimitDate {
-    if (nil != _minLimitDate || ![_minLimitDate isEqualToDate:minLimitDate]) {
-        _minLimitDate = minLimitDate;
-        [self setNeedReload];
-    }
-    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
+- (void)dismiss {
+    [self.superview removeFromSuperview];
 }
 
-- (NSDate *)maxLimitDate {
-    if (nil == _maxLimitDate) {
-        _maxLimitDate = [NSDate dateWithStr:@"2099-12-31 23:59" format:@"yyyy-MM-dd HH:mm"];
+- (void)didConfirm{
+    if (nil != _confirmBlock) {
+        _confirmBlock(_selectDate);
     }
-    return _maxLimitDate;
-}
-
-- (void)setMaxLimitDate:(NSDate *)maxLimitDate {
-    if (nil == _maxLimitDate || ![_maxLimitDate isEqualToDate:maxLimitDate]) {
-        _maxLimitDate = maxLimitDate;
-        [self setNeedReload];
-    }
-    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
-}
-
-- (void)setSelectDate:(NSDate *)selectDate {
-    if (nil == _selectDate || ![_selectDate isEqualToDate:selectDate]) {
-        _selectDate = selectDate;
-        [self setNeedReload];
-    }
-}
-
-- (NSDate *)selectDate {
-    if (nil == _selectDate) {
-        _selectDate = NSDate.date;
-    }
-    if ([_selectDate isEarlierThanDate:self.minLimitDate]) {
-        _selectDate = _minLimitDate;
-    } else if ([_selectDate isLaterThanDate:self.maxLimitDate]) {
-        _selectDate = _maxLimitDate;
-    }
-    return _selectDate;
-}
-
-- (void)setStyle:(JYDatePickerComponentsStyle)style {
-    if (_style != style) {
-        _style = style;
-        
-        [_optionArray removeAllObjects];
-        if (nil == _optionArray) {
-            _optionArray = [NSMutableArray array];
-        }
-        for (NSInteger i = 0; i < kJYDatePickerComponentsOptionCount; ++i) {
-            NSInteger option = kAllDateOptions[i];
-            if ((option & _style) == option) {
-                [_optionArray addObject:@(option)];
-            }
-        }
-        [self setNeedReload];
-    }
-}
-
-- (NSArray<NSNumber *> *)optionArray {
-    return _optionArray;
-}
-
-- (NSMutableArray<NSNumber *> *)unitArrayForOption:(JYDatePickerComponentsOption)option {
-    NSMutableArray<NSNumber *> *array = _optionToUnitDic[@(option)];
-    if (nil == array) {
-        array = [NSMutableArray array];
-        if (nil == _optionToUnitDic) {
-            _optionToUnitDic = [NSMutableDictionary dictionary];
-        }
-        _optionToUnitDic[@(option)] = array;
-    }
-    return array;
+    [self dismiss];
 }
 
 - (void)setNeedReload {
@@ -309,8 +215,6 @@ static CGFloat const kConfirmBtnHeight = 50;
             }
         }
     });
-    
-    
 }
 
 
@@ -402,6 +306,106 @@ static CGFloat const kConfirmBtnHeight = 50;
                                                    forDate:date];
     self.selectDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd", year, month, MIN(day, days.length), hour, minute] format:@"yyyy-MM-dd HH:mm"];
 }
+
+#pragma mark - 懒加载
+- (JYPickerToolBarView *)pickerToolBarView{
+    if (_pickerToolBarView == nil) {
+        _pickerToolBarView = [[JYPickerToolBarView alloc] initWithFrame:CGRectMake(0, self.frame.origin.y - kConfirmBtnHeight, CGRectGetWidth(self.frame), kConfirmBtnHeight) didConfirmDate:^(JYPickerToolBarViewButtonType type) {
+            if (type == JYPickerToolBarViewButtonTypeLeft) {
+                [self dismiss];
+                NSLog(@"左侧按钮");
+            }else{
+                [self didConfirm];
+                NSLog(@"右侧按钮");
+            }
+        }];
+    }
+    return _pickerToolBarView;
+}
+
+- (NSDate *)minLimitDate {
+    if (nil == _minLimitDate) {
+        _minLimitDate = [NSDate dateWithStr:@"1900-01-01 00:00" format:@"yyyy-MM-dd HH:mm"];
+    }
+    return _minLimitDate;
+}
+
+- (void)setMinLimitDate:(NSDate *)minLimitDate {
+    if (nil != _minLimitDate || ![_minLimitDate isEqualToDate:minLimitDate]) {
+        _minLimitDate = minLimitDate;
+        [self setNeedReload];
+    }
+    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
+}
+
+- (NSDate *)maxLimitDate {
+    if (nil == _maxLimitDate) {
+        _maxLimitDate = [NSDate dateWithStr:@"2099-12-31 23:59" format:@"yyyy-MM-dd HH:mm"];
+    }
+    return _maxLimitDate;
+}
+
+- (void)setMaxLimitDate:(NSDate *)maxLimitDate {
+    if (nil == _maxLimitDate || ![_maxLimitDate isEqualToDate:maxLimitDate]) {
+        _maxLimitDate = maxLimitDate;
+        [self setNeedReload];
+    }
+    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
+}
+
+- (void)setSelectDate:(NSDate *)selectDate {
+    if (nil == _selectDate || ![_selectDate isEqualToDate:selectDate]) {
+        _selectDate = selectDate;
+        [self setNeedReload];
+    }
+}
+
+- (NSDate *)selectDate {
+    if (nil == _selectDate) {
+        _selectDate = NSDate.date;
+    }
+    if ([_selectDate isEarlierThanDate:self.minLimitDate]) {
+        _selectDate = _minLimitDate;
+    } else if ([_selectDate isLaterThanDate:self.maxLimitDate]) {
+        _selectDate = _maxLimitDate;
+    }
+    return _selectDate;
+}
+
+- (void)setStyle:(JYDatePickerComponentsStyle)style {
+    if (_style != style) {
+        _style = style;
+
+        [_optionArray removeAllObjects];
+        if (nil == _optionArray) {
+            _optionArray = [NSMutableArray array];
+        }
+        for (NSInteger i = 0; i < kJYDatePickerComponentsOptionCount; ++i) {
+            NSInteger option = kAllDateOptions[i];
+            if ((option & _style) == option) {
+                [_optionArray addObject:@(option)];
+            }
+        }
+        [self setNeedReload];
+    }
+}
+
+- (NSArray<NSNumber *> *)optionArray {
+    return _optionArray;
+}
+
+- (NSMutableArray<NSNumber *> *)unitArrayForOption:(JYDatePickerComponentsOption)option {
+    NSMutableArray<NSNumber *> *array = _optionToUnitDic[@(option)];
+    if (nil == array) {
+        array = [NSMutableArray array];
+        if (nil == _optionToUnitDic) {
+            _optionToUnitDic = [NSMutableDictionary dictionary];
+        }
+        _optionToUnitDic[@(option)] = array;
+    }
+    return array;
+}
+
 
 - (void)dealloc{
     NSLog(@"----- JYDatePickerView ----- 销毁");

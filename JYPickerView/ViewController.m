@@ -8,10 +8,18 @@
 
 #import "ViewController.h"
 #import "JYDatePickerView.h"
+#import "JYPickerToolBarView.h"
+
+#import <YYModel.h>
+#import "JYLevelPickerModel.h"
+#import "JYLevelPickerView.h"
+#import "JYLevelPickerTestModel.h"
 
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addrLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addrCodeLabel;
 
 @end
 
@@ -32,12 +40,29 @@
         datePickerView.maxLimitDate = [df dateFromString:date];
 
         datePickerView.selectDate = [df dateFromString:weakSelf.dateLabel.text];
+
+        datePickerView.pickerToolBarView.titleText = @"zhao";
     } resultDateBlock:^(NSDate *date) {
         NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
         df.dateFormat = @"yyyy-MM-dd HH:mm";
         weakSelf.dateLabel.text = [df stringFromDate:date];
     }];
+}
+
+- (IBAction)levelPickerAction:(UIButton *)sender {
+
+    NSArray * res = [NSArray yy_modelArrayWithClass:[JYLevelPickerTestModel class] json:[JYLevelPickerTestModel threeLevelDataSource]];
+
+    [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
+        pickerView.defaultCode = self.addrCodeLabel.text;
+        pickerView.titleText = @"借款用途";
+    } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
+        self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName];
+        self.addrCodeLabel.text = lastModel.dataCode;
+    }];
+
+
 }
 
 @end

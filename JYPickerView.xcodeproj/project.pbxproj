@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E51D0B83A5D01801592AB8F /* libPods-JYPickerView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB3B111538A310D640D2CC28 /* libPods-JYPickerView.a */; };
+		7B050B602199173F00AE0D35 /* JYLevelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5A2199173F00AE0D35 /* JYLevelPickerView.m */; };
+		7B050B612199173F00AE0D35 /* JYLevelPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */; };
+		7B050B622199173F00AE0D35 /* JYLevelPickerTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */; };
 		7B0C9402219590F0005D7200 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C9401219590F0005D7200 /* AppDelegate.m */; };
 		7B0C9405219590F0005D7200 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C9404219590F0005D7200 /* ViewController.m */; };
 		7B0C9408219590F0005D7200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0C9406219590F0005D7200 /* Main.storyboard */; };
@@ -19,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2665CF0C225DEC6C3E6BE0 /* Pods-JYPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JYPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JYPickerView/Pods-JYPickerView.debug.xcconfig"; sourceTree = "<group>"; };
+		7B050B5A2199173F00AE0D35 /* JYLevelPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerView.m; sourceTree = "<group>"; };
+		7B050B5B2199173F00AE0D35 /* JYLevelPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerView.h; sourceTree = "<group>"; };
+		7B050B5C2199173F00AE0D35 /* JYLevelPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerModel.h; sourceTree = "<group>"; };
+		7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerModel.m; sourceTree = "<group>"; };
+		7B050B5E2199173F00AE0D35 /* JYLevelPickerTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerTestModel.h; sourceTree = "<group>"; };
+		7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerTestModel.m; sourceTree = "<group>"; };
 		7B0C93FD219590F0005D7200 /* JYPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JYPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0C9400219590F0005D7200 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7B0C9401219590F0005D7200 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -35,6 +46,8 @@
 		7B0C941C21959189005D7200 /* JYDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYDatePickerView.h; sourceTree = "<group>"; };
 		7B0C942021959235005D7200 /* NSDate+JYPickerDate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+JYPickerDate.h"; sourceTree = "<group>"; };
 		7B0C942121959235005D7200 /* NSDate+JYPickerDate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JYPickerDate.m"; sourceTree = "<group>"; };
+		8EA407F85C386697BF4CD121 /* Pods-JYPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JYPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-JYPickerView/Pods-JYPickerView.release.xcconfig"; sourceTree = "<group>"; };
+		FB3B111538A310D640D2CC28 /* libPods-JYPickerView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JYPickerView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,17 +55,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E51D0B83A5D01801592AB8F /* libPods-JYPickerView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AD35F048026B152C6981A85 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B2665CF0C225DEC6C3E6BE0 /* Pods-JYPickerView.debug.xcconfig */,
+				8EA407F85C386697BF4CD121 /* Pods-JYPickerView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7B050B592199172A00AE0D35 /* JYLevelPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7B050B5C2199173F00AE0D35 /* JYLevelPickerModel.h */,
+				7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */,
+				7B050B5E2199173F00AE0D35 /* JYLevelPickerTestModel.h */,
+				7B050B5F2199173F00AE0D35 /* JYLevelPickerTestModel.m */,
+				7B050B5B2199173F00AE0D35 /* JYLevelPickerView.h */,
+				7B050B5A2199173F00AE0D35 /* JYLevelPickerView.m */,
+			);
+			path = JYLevelPickerView;
+			sourceTree = "<group>";
+		};
 		7B0C93F4219590F0005D7200 = {
 			isa = PBXGroup;
 			children = (
 				7B0C93FF219590F0005D7200 /* JYPickerView */,
 				7B0C93FE219590F0005D7200 /* Products */,
+				0AD35F048026B152C6981A85 /* Pods */,
+				CC12BEB117B08106E9C05049 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +109,7 @@
 				7B0C9401219590F0005D7200 /* AppDelegate.m */,
 				7B0C9403219590F0005D7200 /* ViewController.h */,
 				7B0C9404219590F0005D7200 /* ViewController.m */,
+				7B050B592199172A00AE0D35 /* JYLevelPickerView */,
 				7B0C9416219590F9005D7200 /* JYDatePickerView */,
 				7B0C9406219590F0005D7200 /* Main.storyboard */,
 				7B0C9409219590F1005D7200 /* Assets.xcassets */,
@@ -94,6 +133,14 @@
 			path = JYDatePickerView;
 			sourceTree = "<group>";
 		};
+		CC12BEB117B08106E9C05049 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB3B111538A310D640D2CC28 /* libPods-JYPickerView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,6 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B0C9413219590F1005D7200 /* Build configuration list for PBXNativeTarget "JYPickerView" */;
 			buildPhases = (
+				7659EC7B24C15D1DF0C2C84D /* [CP] Check Pods Manifest.lock */,
 				7B0C93F9219590F0005D7200 /* Sources */,
 				7B0C93FA219590F0005D7200 /* Frameworks */,
 				7B0C93FB219590F0005D7200 /* Resources */,
@@ -159,15 +207,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7659EC7B24C15D1DF0C2C84D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JYPickerView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7B0C93F9219590F0005D7200 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7B0C9405219590F0005D7200 /* ViewController.m in Sources */,
+				7B050B612199173F00AE0D35 /* JYLevelPickerModel.m in Sources */,
 				7B0C941F21959189005D7200 /* JYDatePickerView.m in Sources */,
 				7B0C941E21959189005D7200 /* JYPickerToolBarView.m in Sources */,
 				7B0C9410219590F1005D7200 /* main.m in Sources */,
+				7B050B602199173F00AE0D35 /* JYLevelPickerView.m in Sources */,
+				7B050B622199173F00AE0D35 /* JYLevelPickerTestModel.m in Sources */,
 				7B0C9402219590F0005D7200 /* AppDelegate.m in Sources */,
 				7B0C942221959235005D7200 /* NSDate+JYPickerDate.m in Sources */,
 			);
@@ -309,6 +381,7 @@
 		};
 		7B0C9414219590F1005D7200 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B2665CF0C225DEC6C3E6BE0 /* Pods-JYPickerView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -327,6 +400,7 @@
 		};
 		7B0C9415219590F1005D7200 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EA407F85C386697BF4CD121 /* Pods-JYPickerView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

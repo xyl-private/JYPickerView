@@ -9,13 +9,19 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class JYPickerToolBarView;
 typedef NSInteger JYDatePickerComponentsStyle;
+/// 年月日时分
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHM;
-extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM;
-extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM;
+/// 年月日
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD;
+/// 月日
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD;
+/// 月日时分
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM;
+/// 日时分
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM;
+/// 时分
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM;
 
 @interface JYDatePickerView : UIPickerView
@@ -48,5 +54,7 @@ extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM;
  */
 @property (nonatomic, strong) NSDate *selectDate;
 
+/** picker Tool Bar View */
+@property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;
 @end
 NS_ASSUME_NONNULL_END
