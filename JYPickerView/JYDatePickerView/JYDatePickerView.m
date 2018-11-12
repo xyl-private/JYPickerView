@@ -85,7 +85,7 @@ kJYDatePickerComponentsOptionSecond;
 static CGFloat const kConfirmBtnHeight = 44;
 
 @interface JYDatePickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
-
+// 是否需要刷新 yes 刷新
 @property (nonatomic, assign) BOOL needReload;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<NSNumber *> *> *optionToUnitDic;
 @property (nonatomic, copy) void (^confirmBlock)(NSDate *date);
