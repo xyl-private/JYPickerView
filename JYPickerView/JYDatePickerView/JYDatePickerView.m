@@ -26,18 +26,30 @@ static NSInteger const kAllDateOptions[] = {
     kJYDatePickerComponentsOptionDay,
     kJYDatePickerComponentsOptionHour,
     kJYDatePickerComponentsOptionMinute,
+    kJYDatePickerComponentsOptionSecond,
 };
-
+// 年月日 时分秒
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHMS = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute | kJYDatePickerComponentsOptionSecond;
+// 年月日 时分
 JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHM = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;;
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM = kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
-
-
+// 年
 JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleY = kJYDatePickerComponentsOptionYear;
+// 年月
 JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYM = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth;
+// 年月日
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
+// 月日
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
+// 月日 时分
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+// 日 时分
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM = kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+// 时分
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+// 时分秒
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHMS  = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute | kJYDatePickerComponentsOptionSecond;
+
+
 
 
 static CGFloat const kConfirmBtnHeight = 50;
@@ -127,11 +139,13 @@ static CGFloat const kConfirmBtnHeight = 50;
         NSMutableArray *dayArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionDay];
         NSMutableArray *hourArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionHour];
         NSMutableArray *minuteArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionMinute];
+        NSMutableArray *secondArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionSecond];
         [yearArray removeAllObjects];
         [monthArray removeAllObjects];
         [dayArray removeAllObjects];
         [hourArray removeAllObjects];
         [minuteArray removeAllObjects];
+        [secondArray removeAllObjects];
         
         NSInteger minYear = wSelf.minLimitDate.year;
         NSInteger maxYear = wSelf.maxLimitDate.year;
@@ -143,6 +157,7 @@ static CGFloat const kConfirmBtnHeight = 50;
         NSInteger minDay = 1;
         NSInteger minHour = 0;
         NSInteger minMinute = 0;
+        NSInteger minSecond = 0;
         if (date.year == minYear) {
             minMonth = wSelf.minLimitDate.month;
             if (date.month == minMonth) {
@@ -151,6 +166,9 @@ static CGFloat const kConfirmBtnHeight = 50;
                     minHour = wSelf.minLimitDate.hour;
                     if (date.hour == minHour) {
                         minMinute = wSelf.minLimitDate.minute;
+                        if (date.minute == minMinute) {
+                            minSecond = wSelf.minLimitDate.seconds;
+                        }
                     }
                 }
             }
@@ -163,6 +181,7 @@ static CGFloat const kConfirmBtnHeight = 50;
         NSInteger maxDay = days.length;
         NSInteger maxHour = 23;
         NSInteger maxMinute = 59;
+        NSInteger maxSecond = 59;
         if (date.year == maxYear) {
             maxMonth = wSelf.maxLimitDate.month;
             if (date.month == maxMonth) {
@@ -171,6 +190,9 @@ static CGFloat const kConfirmBtnHeight = 50;
                     maxHour = wSelf.maxLimitDate.hour;
                     if (date.hour == maxHour) {
                         maxMinute = wSelf.maxLimitDate.minute;
+                        if (date.minute == maxMinute) {
+                            maxSecond = wSelf.maxLimitDate.seconds;
+                        }
                     }
                 }
             }
@@ -187,6 +209,9 @@ static CGFloat const kConfirmBtnHeight = 50;
         }
         for (NSInteger i = minMinute; i <= maxMinute; ++i) {
             [minuteArray addObject:@(i)];
+        }
+        for (NSInteger i = minSecond; i <= maxSecond; ++i) {
+            [secondArray addObject:@(i)];
         }
         
         [wSelf reloadAllComponents];
@@ -213,6 +238,10 @@ static CGFloat const kConfirmBtnHeight = 50;
                     break;
                 case kJYDatePickerComponentsOptionMinute: {
                     [wSelf selectRow:[arry indexOfObject:@(date.minute)] inComponent:i animated:NO];
+                }
+                    break;
+                case kJYDatePickerComponentsOptionSecond: {
+                    [wSelf selectRow:[arry indexOfObject:@(date.seconds)] inComponent:i animated:NO];
                 }
                     break;
                 default:
@@ -269,6 +298,9 @@ static CGFloat const kConfirmBtnHeight = 50;
         case kJYDatePickerComponentsOptionMinute:
             suffix = @"分";
             break;
+        case kJYDatePickerComponentsOptionSecond:
+            suffix = @"秒";
+            break;
         default:
             break;
     }
@@ -284,6 +316,7 @@ static CGFloat const kConfirmBtnHeight = 50;
     NSInteger day = _selectDate.day;
     NSInteger hour = _selectDate.hour;
     NSInteger minute = _selectDate.minute;
+    NSInteger second = _selectDate.seconds;
     JYDatePickerComponentsOption option = self.optionArray[component].integerValue;
     NSInteger num = [self unitArrayForOption:option][row].integerValue;
     switch (option) {
@@ -302,14 +335,17 @@ static CGFloat const kConfirmBtnHeight = 50;
         case kJYDatePickerComponentsOptionMinute:
             minute = num;
             break;
+        case kJYDatePickerComponentsOptionSecond:
+            second = num;
+            break;
         default:
             break;
     }
-    NSDate *date = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-01 00:00", year, month] format:@"yyyy-MM-dd HH:mm"];
+    NSDate *date = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-01 00:00:00", year, month] format:@"yyyy-MM-dd HH:mm:ss"];
     NSRange days = [NSCalendar.currentCalendar rangeOfUnit:NSCalendarUnitDay
                                                     inUnit:NSCalendarUnitMonth
                                                    forDate:date];
-    self.selectDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd", year, month, MIN(day, days.length), hour, minute] format:@"yyyy-MM-dd HH:mm"];
+    self.selectDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd:%zd", year, month, MIN(day, days.length), hour, minute,second] format:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 #pragma mark - 懒加载
@@ -330,7 +366,7 @@ static CGFloat const kConfirmBtnHeight = 50;
 
 - (NSDate *)minLimitDate {
     if (nil == _minLimitDate) {
-        _minLimitDate = [NSDate dateWithStr:@"1900-01-01 00:00" format:@"yyyy-MM-dd HH:mm"];
+        _minLimitDate = [NSDate dateWithStr:@"1900-01-01 00:00:00" format:@"yyyy-MM-dd HH:mm:ss"];
     }
     return _minLimitDate;
 }
@@ -345,7 +381,7 @@ static CGFloat const kConfirmBtnHeight = 50;
 
 - (NSDate *)maxLimitDate {
     if (nil == _maxLimitDate) {
-        _maxLimitDate = [NSDate dateWithStr:@"2099-12-31 23:59" format:@"yyyy-MM-dd HH:mm"];
+        _maxLimitDate = [NSDate dateWithStr:@"2099-12-31 23:59:59" format:@"yyyy-MM-dd HH:mm:ss"];
     }
     return _maxLimitDate;
 }

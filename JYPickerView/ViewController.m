@@ -32,20 +32,20 @@
 
 - (IBAction)datePickerAction:(UIButton *)sender {
     __weak typeof(self) weakSelf = self;
-    [JYDatePickerView jy_datePickerWithStyle:kJYDatePickerComponentsStyleYM configuration:^(JYDatePickerView *datePickerView) {
+    [JYDatePickerView jy_datePickerWithStyle:kJYDatePickerComponentsStyleYMDHMS configuration:^(JYDatePickerView *datePickerView) {
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
-        df.dateFormat = @"yyyy-MM-dd HH:mm";
-        datePickerView.minLimitDate = [df dateFromString:@"2018-2-9 12:12"];
-        NSString * date = @"2019-8-9 12:12";
+        df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        datePickerView.minLimitDate = [df dateFromString:@"2017-11-12 12:12:34"];
+        NSString * date = @"2028-11-12 1:22:59";
         datePickerView.maxLimitDate = [df dateFromString:date];
-
-        datePickerView.selectDate = [df dateFromString:weakSelf.dateLabel.text];
+        NSDate * seleDate = [df dateFromString:@"2018-11-12 11:16:58"];
+        datePickerView.selectDate = seleDate;
 
         datePickerView.pickerToolBarView.titleText = @"时间选择器";
     } resultDateBlock:^(NSDate *date) {
         NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
-        df.dateFormat = @"yyyy-MM";
+        df.dateFormat = @"HH:mm:ss";
         weakSelf.dateLabel.text = [df stringFromDate:date];
     }];
 }
