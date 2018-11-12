@@ -10,6 +10,8 @@
 #import "NSDate+JYPickerDate.h"
 #import "JYPickerToolBarView.h"
 
+#define IS_IPHONE_X ([UIScreen mainScreen].bounds.size.height == 812.0f) ? YES : NO
+
 typedef NS_OPTIONS(NSInteger, JYDatePickerComponentsOption) {
     kJYDatePickerComponentsOptionYear = 1,
     kJYDatePickerComponentsOptionMonth = 1 << 1,
@@ -60,6 +62,9 @@ static CGFloat const kConfirmBtnHeight = 50;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<NSNumber *> *> *optionToUnitDic;
 @property (nonatomic, copy) void (^confirmBlock)(NSDate *date);
 
+/** Description */
+@property (nonatomic, strong) UIView *container;
+
 @end
 
 
@@ -99,13 +104,7 @@ static CGFloat const kConfirmBtnHeight = 50;
     if (self.superview.superview == keyWindow) {
         return;
     }
-    UIView *container = [[UIView alloc] init];
-    container.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    [container addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
-    container.frame = keyWindow.bounds;
-    [container addSubview:self];
-    [container addSubview:self.pickerToolBarView];
-    [keyWindow addSubview:container];
+    [keyWindow addSubview:self.container];
 }
 
 - (void)dismiss {
@@ -349,6 +348,29 @@ static CGFloat const kConfirmBtnHeight = 50;
 }
 
 #pragma mark - 懒加载
+
+- (UIView *)container{
+    if (_container == nil) {
+        UIWindow *keyWindow = UIApplication.sharedApplication.keyWindow;
+        UIView *container = [[UIView alloc] init];
+        container.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.6];
+        UITapGestureRecognizer* singleRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+        //点击的次数
+        singleRecognizer.numberOfTapsRequired = 1; // 单击
+        //添加一个手势监测；
+        [container addGestureRecognizer:singleRecognizer];
+        if (IS_IPHONE_X) {
+            container.frame = CGRectMake(0, 0, keyWindow.bounds.size.width, keyWindow.bounds.size.height - 34);
+        }else{
+            container.frame = keyWindow.bounds;
+        }
+        [container addSubview:self];
+        [container addSubview:self.pickerToolBarView];
+        _container = container;
+    }
+    return _container;
+}
+
 - (JYPickerToolBarView *)pickerToolBarView{
     if (_pickerToolBarView == nil) {
         _pickerToolBarView = [[JYPickerToolBarView alloc] initWithFrame:CGRectMake(0, self.frame.origin.y - kConfirmBtnHeight, CGRectGetWidth(self.frame), kConfirmBtnHeight) didConfirmDate:^(JYPickerToolBarViewButtonType type) {

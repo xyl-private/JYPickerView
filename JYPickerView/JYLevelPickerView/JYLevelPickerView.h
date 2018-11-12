@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class JYLevelPickerView,JYLevelPickerModel;
+@class JYLevelPickerView,JYLevelPickerModel,JYPickerToolBarView;
 typedef NS_ENUM(NSUInteger, JYLevelPickerViewLevel) {
     /// 没有
     JYLevelPickerViewLevelNor = 0,
@@ -28,7 +28,8 @@ typedef void (^LevelPickerChosseResultBlock)(JYLevelPickerModel * resultModel,JY
 
 /** 默认展示的code */
 @property (nonatomic, copy) NSString * defaultCode;
-
+/** picker Tool Bar View */
+@property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;
 
 /** 设置 内容字体 */
 @property (nonatomic, strong) UIFont * contentTextFont;

@@ -42,6 +42,7 @@
         datePickerView.selectDate = seleDate;
 
         datePickerView.pickerToolBarView.titleText = @"时间选择器";
+        datePickerView.pickerToolBarView.isShowLine = YES;
     } resultDateBlock:^(NSDate *date) {
         NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
@@ -57,6 +58,8 @@
     [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
         pickerView.defaultCode = self.addrCodeLabel.text;
         pickerView.titleText = @"地址选择器";
+        pickerView.pickerToolBarView.isShowLine = YES;
+        pickerView.pickerToolBarView.lineViewColor = [UIColor redColor];
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
         self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName];
         self.addrCodeLabel.text = lastModel.dataCode;

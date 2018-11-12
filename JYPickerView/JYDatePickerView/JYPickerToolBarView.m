@@ -15,6 +15,8 @@
 /** 标题 */
 @property (nonatomic, strong) UILabel *  titleLabel;
 
+@property (nonatomic, strong) UIView * lineView;
+
 /** block */
 @property (nonatomic, copy) PickerToolBarViewBlock pickerToolBarViewBlock;
 @end
@@ -30,6 +32,7 @@ static CGFloat const kConfirmBtnX = 4;
         [self addSubview:self.leftButton];
         [self addSubview:self.rightButton];
         [self addSubview:self.titleLabel];
+        [self addSubview:self.lineView];
         self.pickerToolBarViewBlock = confirmBlock;
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -94,6 +97,14 @@ static CGFloat const kConfirmBtnX = 4;
     }
 }
 
+- (UIView *)lineView{
+    if (_lineView == nil) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 1, CGRectGetWidth(self.frame), 1)];
+        _lineView.backgroundColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
+        _lineView.hidden = YES;
+    }
+    return _lineView;
+}
 #pragma mark - 基础设置
 
 - (void)setTitleText:(NSString *)titleText{
@@ -147,5 +158,15 @@ static CGFloat const kConfirmBtnX = 4;
     self.titleLabel.backgroundColor = toolbarBackgroundColor;
     self.leftButton.backgroundColor = toolbarBackgroundColor;
     self.rightButton.backgroundColor = toolbarBackgroundColor;
+}
+
+- (void)setIsShowLine:(BOOL)isShowLine{
+    _isShowLine = isShowLine;
+    self.lineView.hidden = !isShowLine;
+}
+
+- (void)setLineViewColor:(UIColor *)lineViewColor{
+    _lineViewColor = lineViewColor;
+    self.lineView.backgroundColor = lineViewColor;
 }
 @end

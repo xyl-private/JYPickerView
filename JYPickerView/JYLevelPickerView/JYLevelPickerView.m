@@ -8,7 +8,7 @@
 
 #import "JYLevelPickerView.h"
 #import "JYLevelPickerModel.h"
-
+#import "JYPickerToolBarView.h"
 #define IS_IPHONE_X ([UIScreen mainScreen].bounds.size.height == 812.0f) ? YES : NO
 
 static const int ToobarHeight = 40;
@@ -28,11 +28,11 @@ static const int DangerArea = 34;
 // 选择器view
 @property (nonatomic, strong) UIView * showView;
 
-// 确定/取消/标题控件所在的bar
-@property (nonatomic, strong) UIView * toolbar;
-@property (nonatomic, strong) UILabel * titleLabel;
-@property (nonatomic, strong) UIButton * rightButton;
-@property (nonatomic, strong) UIButton * leftButton;
+//// 确定/取消/标题控件所在的bar
+//@property (nonatomic, strong) UIView * toolbar;
+//@property (nonatomic, strong) UILabel * titleLabel;
+//@property (nonatomic, strong) UIButton * rightButton;
+//@property (nonatomic, strong) UIButton * leftButton;
 
 
 // 第二列选中的行
@@ -80,7 +80,7 @@ static const int DangerArea = 34;
 - (void)setBaseView {
     self.frame = [UIScreen mainScreen].bounds;
     [self addSubview:self.backgroundView];
-    [self.showView addSubview:self.toolbar];
+    [self.showView addSubview:self.pickerToolBarView];
     [self.showView addSubview:self.pickerView];
 }
 
@@ -203,7 +203,7 @@ static const int DangerArea = 34;
 }
 
 -(void)show{
-    self.pickerView.frame=CGRectMake(0, ToobarHeight, self.toolbar.frame.size.width, self.pickerView.frame.size.height);
+    self.pickerView.frame=CGRectMake(0, ToobarHeight, self.pickerToolBarView.frame.size.width, self.pickerView.frame.size.height);
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     CGFloat toolViewX = 0;
     CGFloat toolViewH = self.pickeviewHeight+ToobarHeight;
@@ -271,65 +271,26 @@ static const int DangerArea = 34;
         pickView.backgroundColor = [UIColor whiteColor];
         pickView.delegate = self;
         pickView.dataSource = self;
-        pickView.frame = CGRectMake(0, ToobarHeight, self.toolbar.frame.size.width, pickView.frame.size.height);
+        pickView.frame = CGRectMake(0, ToobarHeight, self.pickerToolBarView.frame.size.width, pickView.frame.size.height);
         _pickerView = pickView;
         self.pickeviewHeight = pickView.frame.size.height;
     }
     return _pickerView;
 }
 
-- (UIView *)toolbar{
-    if (_toolbar == nil) {
-        UIView *toolbarV=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, ToobarHeight)];
-        [toolbarV setBackgroundColor:[UIColor whiteColor]];
-        _toolbar = toolbarV;
-        [_toolbar addSubview:self.leftButton];
-        [_toolbar addSubview:self.rightButton];
-        [_toolbar addSubview:self.titleLabel];
+- (JYPickerToolBarView *)pickerToolBarView{
+    if (_pickerToolBarView == nil) {
+        _pickerToolBarView = [[JYPickerToolBarView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), ToobarHeight) didConfirmDate:^(JYPickerToolBarViewButtonType type) {
+            if (type == JYPickerToolBarViewButtonTypeLeft) {
+                NSLog(@"左侧按钮");
+                [self remove];
+            }else{
+                NSLog(@"右侧按钮");
+                [self rightButtonClick];
+            }
+        }];
     }
-    return _toolbar;
-}
-
-- (UIButton *)leftButton{
-    if (_leftButton == nil) {
-        UIButton * leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [leftButton setFrame:CGRectMake(10, 0, ToobarHeight, ToobarHeight)];
-        [leftButton addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
-        [leftButton setTitle:@"取消" forState:UIControlStateNormal];
-        leftButton.titleLabel.font = [UIFont systemFontOfSize:18];
-        // 999999
-        [leftButton setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1] forState:UIControlStateNormal];
-        _leftButton = leftButton;
-    }
-    return _leftButton;
-}
-
-- (UILabel *)titleLabel{
-    if (_titleLabel == nil) {
-        UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, ToobarHeight)];
-        [titleLabel setBackgroundColor:[UIColor whiteColor]];
-        [titleLabel setTextAlignment:NSTextAlignmentCenter];
-        // 656E7B
-        [titleLabel setTextColor:[UIColor colorWithRed:101/255.0 green:110/255.0 blue:123/255.0 alpha:1]];
-        titleLabel.font =  [UIFont boldSystemFontOfSize:16];
-        [titleLabel setCenter:self.toolbar.center];
-        _titleLabel = titleLabel;
-    }
-    return _titleLabel;
-}
-
--(UIButton *)rightButton{
-    if (_rightButton == nil) {
-        UIButton * rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [rightButton setFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - (10+ToobarHeight), 0, ToobarHeight, ToobarHeight)];
-        [rightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        [rightButton setTitle:@"确定" forState:UIControlStateNormal];
-        rightButton.titleLabel.font = [UIFont systemFontOfSize:18];
-        // 4A78F8
-        [rightButton setTitleColor:[UIColor colorWithRed:74/255.0 green:120/255.0 blue:248/255.0 alpha:1] forState:UIControlStateNormal];
-        _rightButton = rightButton;
-    }
-    return _rightButton;
+    return _pickerToolBarView;
 }
 
 #pragma mark - 基础设置
@@ -387,57 +348,6 @@ static const int DangerArea = 34;
 -(void)setContentTextColor:(UIColor *)contentTextColor{
     _contentTextColor = contentTextColor;
     [self.pickerView reloadAllComponents];
-}
-
-- (void)setTitleText:(NSString *)titleText{
-    _titleText = titleText;
-    self.titleLabel.text = titleText;
-}
-
-- (void)setTitleTextColor:(UIColor *)titleTextColor{
-    _titleTextColor = titleTextColor;
-    self.titleLabel.textColor = titleTextColor;
-}
-
-- (void)setTitleTextFont:(UIFont *)titleTextFont{
-    _titleTextFont = titleTextFont;
-    self.titleLabel.font = titleTextFont;
-}
-
-- (void)setLeftTitleText:(NSString *)leftTitleText{
-    _leftTitleText = leftTitleText;
-    [self.leftButton setTitle:leftTitleText forState:UIControlStateNormal];
-}
-
-- (void)setLeftTextFont:(UIFont *)leftTextFont{
-    _leftTextFont = leftTextFont;
-    self.leftButton.titleLabel.font = leftTextFont;
-}
-
-- (void)setLeftTextColor:(UIColor *)leftTextColor{
-    _leftTextColor = leftTextColor;
-    [self.leftButton setTitleColor:leftTextColor forState:UIControlStateNormal];
-}
-
-- (void)setRightTitleText:(NSString *)rightTitleText{
-    _rightTitleText = rightTitleText;
-    [self.rightButton setTitle:rightTitleText forState:UIControlStateNormal];
-}
-
-- (void)setRightTextFont:(UIFont *)rightTextFont{
-    _rightTextFont = rightTextFont;
-    self.rightButton.titleLabel.font = rightTextFont;
-}
-
-- (void)setRightTextColor:(UIColor *)rightTextColor{
-    _rightTextColor = rightTextColor;
-    [self.rightButton setTitleColor:rightTextColor forState:UIControlStateNormal];
-}
-
-- (void)setToolbarBackgroundColor:(UIColor *)toolbarBackgroundColor{
-    _toolbarBackgroundColor = toolbarBackgroundColor;
-    self.toolbar.backgroundColor = toolbarBackgroundColor;
-    self.titleLabel.backgroundColor = toolbarBackgroundColor;
 }
 
 -(void)dealloc{
