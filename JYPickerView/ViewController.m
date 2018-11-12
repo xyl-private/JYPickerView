@@ -41,7 +41,7 @@
 
         datePickerView.selectDate = [df dateFromString:weakSelf.dateLabel.text];
 
-        datePickerView.pickerToolBarView.titleText = @"zhao";
+        datePickerView.pickerToolBarView.titleText = @"时间选择器";
     } resultDateBlock:^(NSDate *date) {
         NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
@@ -56,7 +56,7 @@
 
     [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
         pickerView.defaultCode = self.addrCodeLabel.text;
-        pickerView.titleText = @"借款用途";
+        pickerView.titleText = @"地址选择器";
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
         self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName];
         self.addrCodeLabel.text = lastModel.dataCode;
