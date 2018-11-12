@@ -24,6 +24,16 @@ extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM;
 /// 时分
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM;
 
+#pragma mark - 带完善
+/// 年月日时分秒
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHMS;
+/// 时分秒
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHMS;
+/// 分秒
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMS;
+/// 年
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYY;
+
 @interface JYDatePickerView : UIPickerView
 
 /**

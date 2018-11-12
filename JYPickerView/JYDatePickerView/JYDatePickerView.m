@@ -16,7 +16,8 @@ typedef NS_OPTIONS(NSInteger, JYDatePickerComponentsOption) {
     kJYDatePickerComponentsOptionDay = 1 << 2,
     kJYDatePickerComponentsOptionHour = 1 << 3,
     kJYDatePickerComponentsOptionMinute = 1 << 4,
-    kJYDatePickerComponentsOptionCount = 5
+    kJYDatePickerComponentsOptionSecond = 1 << 5,
+    kJYDatePickerComponentsOptionCount = 6
 };
 
 static NSInteger const kAllDateOptions[] = {

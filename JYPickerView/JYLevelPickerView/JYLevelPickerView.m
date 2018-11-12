@@ -2,7 +2,7 @@
 //  JYLevelPickerView.m
 //  YYModelDemo
 //
-//  Created by McIntosh on 2018/10/31.
+//  Created by xyanl on 2018/10/31.
 //  Copyright © 2018 xyl~Pro. All rights reserved.
 //
 

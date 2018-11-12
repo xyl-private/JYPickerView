@@ -2,7 +2,7 @@
 //  JYLevelPickerTestModel.h
 //  YYModelDemo
 //
-//  Created by McIntosh on 2018/11/3.
+//  Created by xyanl on 2018/11/3.
 //  Copyright © 2018 xyl~Pro. All rights reserved.
 //
 

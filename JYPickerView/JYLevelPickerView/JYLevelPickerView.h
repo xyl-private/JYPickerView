@@ -2,7 +2,7 @@
 //  JYLevelPickerView.h
 //  YYModelDemo
 //
-//  Created by McIntosh on 2018/10/31.
+//  Created by xyanl on 2018/10/31.
 //  Copyright © 2018 xyl~Pro. All rights reserved.
 //
 //  二级选择器控件 支持 一二级的
