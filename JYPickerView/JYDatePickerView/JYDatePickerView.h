@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSInteger JYDatePickerComponentsStyle;
 /// 年月日时分
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHM;
+/// 年
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleY;
+/// 年月
+extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYM;
 /// 年月日
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD;
 /// 月日
@@ -31,8 +35,6 @@ extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHMS;
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHMS;
 /// 分秒
 extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMS;
-/// 年
-extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYY;
 
 @interface JYDatePickerView : UIPickerView
 

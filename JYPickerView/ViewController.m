@@ -32,7 +32,7 @@
 
 - (IBAction)datePickerAction:(UIButton *)sender {
     __weak typeof(self) weakSelf = self;
-    [JYDatePickerView jy_datePickerWithStyle:kJYDatePickerComponentsStyleYMD configuration:^(JYDatePickerView *datePickerView) {
+    [JYDatePickerView jy_datePickerWithStyle:kJYDatePickerComponentsStyleYM configuration:^(JYDatePickerView *datePickerView) {
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
         df.dateFormat = @"yyyy-MM-dd HH:mm";
         datePickerView.minLimitDate = [df dateFromString:@"2018-2-9 12:12"];
@@ -45,7 +45,7 @@
     } resultDateBlock:^(NSDate *date) {
         NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
-        df.dateFormat = @"yyyy-MM-dd HH:mm";
+        df.dateFormat = @"yyyy-MM";
         weakSelf.dateLabel.text = [df stringFromDate:date];
     }];
 }

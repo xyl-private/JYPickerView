@@ -36,6 +36,10 @@ JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD = kJYDatePicker
 JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
 
 
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleY = kJYDatePickerComponentsOptionYear;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYM = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth;
+
+
 static CGFloat const kConfirmBtnHeight = 50;
 
 @interface JYDatePickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
