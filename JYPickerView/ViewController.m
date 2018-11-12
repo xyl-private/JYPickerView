@@ -40,6 +40,7 @@
         datePickerView.maxLimitDate = [df dateFromString:date];
         NSDate * seleDate = [df dateFromString:@"2018-11-12 11:16:58"];
         datePickerView.selectDate = seleDate;
+        datePickerView.isShowUnit = NO;
 
         datePickerView.pickerToolBarView.titleText = @"时间选择器";
         datePickerView.pickerToolBarView.isShowLine = YES;

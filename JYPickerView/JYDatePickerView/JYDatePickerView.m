@@ -31,30 +31,58 @@ static NSInteger const kAllDateOptions[] = {
     kJYDatePickerComponentsOptionSecond,
 };
 // 年月日 时分秒
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHMS = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute | kJYDatePickerComponentsOptionSecond;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHMS =
+kJYDatePickerComponentsOptionYear |
+kJYDatePickerComponentsOptionMonth |
+kJYDatePickerComponentsOptionDay |
+kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute |
+kJYDatePickerComponentsOptionSecond;
+
 // 年月日 时分
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHM = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMDHM = kJYDatePickerComponentsOptionYear |
+kJYDatePickerComponentsOptionMonth |
+kJYDatePickerComponentsOptionDay |
+kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute;
+
 // 年
 JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleY = kJYDatePickerComponentsOptionYear;
+
 // 年月
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYM = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYM = kJYDatePickerComponentsOptionYear |
+kJYDatePickerComponentsOptionMonth;
+
 // 年月日
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD = kJYDatePickerComponentsOptionYear | kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleYMD = kJYDatePickerComponentsOptionYear |
+kJYDatePickerComponentsOptionMonth |
+kJYDatePickerComponentsOptionDay;
+
 // 月日
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMD = kJYDatePickerComponentsOptionMonth |
+kJYDatePickerComponentsOptionDay;
+
 // 月日 时分
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM = kJYDatePickerComponentsOptionMonth | kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMDHM = kJYDatePickerComponentsOptionMonth |
+kJYDatePickerComponentsOptionDay |
+kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute;
+
 // 日 时分
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM = kJYDatePickerComponentsOptionDay | kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleDHM = kJYDatePickerComponentsOptionDay |
+kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute;
+
 // 时分
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHM = kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute;
+
 // 时分秒
-JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHMS  = kJYDatePickerComponentsOptionHour | kJYDatePickerComponentsOptionMinute | kJYDatePickerComponentsOptionSecond;
+JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleHMS  = kJYDatePickerComponentsOptionHour |
+kJYDatePickerComponentsOptionMinute |
+kJYDatePickerComponentsOptionSecond;
 
-
-
-
-static CGFloat const kConfirmBtnHeight = 50;
+static CGFloat const kConfirmBtnHeight = 44;
 
 @interface JYDatePickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -78,9 +106,9 @@ static CGFloat const kConfirmBtnHeight = 50;
 
 + (void)jy_datePickerWithStyle:(JYDatePickerComponentsStyle)style configuration:(void (^)(JYDatePickerView * datePickerView))configuration resultDateBlock:(void (^)(NSDate *date))resultDateBlock{
     CGRect windowBounds = UIApplication.sharedApplication.keyWindow.bounds;
-    CGFloat pickerHeight = CGRectGetHeight(windowBounds) * 0.35;
+    CGFloat pickerHeight = CGRectGetHeight(windowBounds) * 0.3;
     JYDatePickerView * datePick = [[self alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(windowBounds) - pickerHeight , CGRectGetWidth(windowBounds), pickerHeight) style:style confirmBlock:resultDateBlock];
-    
+    datePick.isShowUnit = YES;
     if (configuration) {
         configuration(datePick);
     }
@@ -303,6 +331,11 @@ static CGFloat const kConfirmBtnHeight = 50;
         default:
             break;
     }
+    // 是否显示 单位
+    if (!self.isShowUnit) {
+        suffix = @"";
+    }
+
     NSArray *arry = [self unitArrayForOption:option];
     label.text = [NSString stringWithFormat:@"%@%@", arry[row], suffix];
     
@@ -469,6 +502,9 @@ static CGFloat const kConfirmBtnHeight = 50;
     return array;
 }
 
+-(void)setIsShowUnit:(BOOL)isShowUnit{
+    _isShowUnit = isShowUnit;
+}
 
 - (void)dealloc{
     NSLog(@"----- JYDatePickerView ----- 销毁");

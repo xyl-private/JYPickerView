@@ -68,5 +68,8 @@ extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMS;
 
 /** picker Tool Bar View */
 @property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;
+
+/** 是否显示时间单位 */
+@property (nonatomic, assign) BOOL isShowUnit;
 @end
 NS_ASSUME_NONNULL_END

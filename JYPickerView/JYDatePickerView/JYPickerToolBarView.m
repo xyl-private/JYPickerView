@@ -14,7 +14,7 @@
 @property (nonatomic, strong) UIButton * rightButton;
 /** 标题 */
 @property (nonatomic, strong) UILabel *  titleLabel;
-
+/** 下边界线 */
 @property (nonatomic, strong) UIView * lineView;
 
 /** block */
@@ -50,7 +50,7 @@ static CGFloat const kConfirmBtnX = 4;
         [leftBtn addTarget:self action:@selector(leftButtonAction) forControlEvents:UIControlEventTouchUpInside];
         leftBtn.frame = CGRectMake(kConfirmBtnX, 0, kConfirmBtnWidth, CGRectGetHeight(self.frame));
         _leftButton = leftBtn;
-
+        
     }
     return _leftButton;
 }
@@ -66,7 +66,7 @@ static CGFloat const kConfirmBtnX = 4;
         [rightBtn addTarget:self action:@selector(rightButtonAction) forControlEvents:UIControlEventTouchUpInside];
         rightBtn.frame = CGRectMake(CGRectGetWidth(self.frame) - kConfirmBtnX - kConfirmBtnWidth, 0, kConfirmBtnWidth, CGRectGetHeight(self.frame));
         _rightButton = rightBtn;
-
+        
     }
     return _rightButton;
 }

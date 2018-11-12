@@ -11,7 +11,7 @@
 #import "JYPickerToolBarView.h"
 #define IS_IPHONE_X ([UIScreen mainScreen].bounds.size.height == 812.0f) ? YES : NO
 
-static const int ToobarHeight = 40;
+static const int ToobarHeight = 44;
 static const int DangerArea = 34;
 
 @interface JYLevelPickerView ()<UIPickerViewDelegate,UIPickerViewDataSource>
@@ -27,13 +27,6 @@ static const int DangerArea = 34;
 @property (nonatomic, strong) UIView * backgroundView;
 // 选择器view
 @property (nonatomic, strong) UIView * showView;
-
-//// 确定/取消/标题控件所在的bar
-//@property (nonatomic, strong) UIView * toolbar;
-//@property (nonatomic, strong) UILabel * titleLabel;
-//@property (nonatomic, strong) UIButton * rightButton;
-//@property (nonatomic, strong) UIButton * leftButton;
-
 
 // 第二列选中的行
 @property (nonatomic,assign) NSInteger secondRow;
