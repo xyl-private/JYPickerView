@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * dataName;
 /** datacode */
 @property (nonatomic, copy) NSString * dataCode;
+/** 父级id */
+@property (nonatomic, copy) NSString * parentId;
 /** 排序使用 */
 @property (nonatomic, copy) NSString * showOrder;
 /** 是否 弃用 */

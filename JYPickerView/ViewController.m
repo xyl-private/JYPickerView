@@ -12,13 +12,20 @@
 #import <YYModel.h>
 #import "JYLevelPickerModel.h"
 #import "JYLevelPickerView.h"
-#import "JYLevelPickerTestModel.h"
+#import "JYLevelAddrPickerModel.h"
+#import "JYPickerModel.h"
+
+#import "JYLevelPickerViewModel.h"
+#import "FMDB.h"
 
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addrLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addrCodeLabel;
+@property (copy, nonatomic) NSString * addrCode;
+
+/** Description */
+@property (nonatomic, strong) NSDictionary * optionToUnitDic;
 
 @end
 
@@ -28,6 +35,29 @@
     [super viewDidLoad];
 
 }
+
+- (IBAction)addrAction:(id)sender {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // 执⾏耗时的异步操作...
+        if ([JYPickerModel sharePickerModel].address.count == 0) {
+            NSArray * arr = [JYLevelPickerViewModel jy_getAllAddressInfoWithSubAddrs:@[] sqliteName:@""];
+            NSArray * models = [NSArray yy_modelArrayWithClass:[JYLevelAddrPickerModel class] json:arr];
+            [JYPickerModel sharePickerModel].address = models;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 回到主线程,执⾏UI刷新操作
+            [JYLevelPickerView jy_initPickviewWithDataSourcesArray:[JYPickerModel sharePickerModel].address level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
+                pickerView.defaultCode = self.addrCode;
+                pickerView.pickerToolBarView.titleText = @"地址选择器";
+            } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
+                weakSelf.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName,lastModel.dataCode];
+                weakSelf.addrCode = lastModel.dataCode;
+            }];
+        });
+    });
+}
+
 
 - (IBAction)datePickerAction:(UIButton *)sender {
     __weak typeof(self) weakSelf = self;
@@ -44,28 +74,24 @@
         datePickerView.pickerToolBarView.titleText = @"时间选择器";
         datePickerView.pickerToolBarView.isShowLine = YES;
     } resultDateBlock:^(NSDate *date) {
-        NSLog(@"resultModelBlock => %@",date);
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
-        df.dateFormat = @"HH:mm:ss";
+        df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         weakSelf.dateLabel.text = [df stringFromDate:date];
     }];
 }
 
 - (IBAction)levelPickerAction:(UIButton *)sender {
-
-    NSArray * res = [NSArray yy_modelArrayWithClass:[JYLevelPickerTestModel class] json:[JYLevelPickerTestModel threeLevelDataSource]];
-
-    [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
-        pickerView.defaultCode = self.addrCodeLabel.text;
+    __weak typeof(self) weakSelf = self;
+    NSArray * res = [NSArray yy_modelArrayWithClass:[JYLevelPickerModel class] json:[JYLevelPickerModel dataSource]];
+    [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelTwo configuration:^(JYLevelPickerView * _Nonnull pickerView) {
+        pickerView.defaultCode = weakSelf.addrCode;
         pickerView.pickerToolBarView.titleText = @"地址选择器";
         pickerView.pickerToolBarView.isShowLine = YES;
         pickerView.pickerToolBarView.lineViewColor = [UIColor redColor];
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
-        self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName];
-        self.addrCodeLabel.text = lastModel.dataCode;
+        self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,lastModel.dataCode];
+        weakSelf.addrCode = lastModel.dataCode;
     }];
-
-
 }
 
 @end
