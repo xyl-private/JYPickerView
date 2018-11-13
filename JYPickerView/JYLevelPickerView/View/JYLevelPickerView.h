@@ -9,9 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import "JYLevelPickerToolBarView.h"
-
+#import "JYLevelPickerModel.h"
 NS_ASSUME_NONNULL_BEGIN
-@class JYLevelPickerView,JYLevelPickerModel;
+@class JYLevelPickerView;
 typedef NS_ENUM(NSUInteger, JYLevelPickerViewLevel) {
     /// 没有
     JYLevelPickerViewLevelNor = 0,

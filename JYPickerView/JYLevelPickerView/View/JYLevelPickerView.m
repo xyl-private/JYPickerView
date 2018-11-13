@@ -7,7 +7,6 @@
 //
 
 #import "JYLevelPickerView.h"
-#import "JYLevelPickerModel.h"
 
 #define IS_IPHONE_X ([UIScreen mainScreen].bounds.size.height == 812.0f) ? YES : NO
 
