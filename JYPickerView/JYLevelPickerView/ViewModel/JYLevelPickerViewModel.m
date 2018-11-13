@@ -8,9 +8,21 @@
 
 #import "JYLevelPickerViewModel.h"
 #import "JYLevelPickerModel.h"
+#import "JYPickerModel.h"
+
 #import "FMDB.h"
 
 @implementation JYLevelPickerViewModel
+
+
++ (NSMutableArray *) jy_getAllAddressDataSourceWithSqliteName:(NSString *)sqliteName{
+    JYPickerModel * pickerModel = [JYPickerModel sharePickerModel];
+    if (pickerModel.address.count == 0) {
+        NSArray * arr = [JYLevelPickerViewModel jy_getAllAddressInfoWithSubAddrs:@[] sqliteName:sqliteName];
+        pickerModel.address = arr;
+    }
+    return pickerModel.address.mutableCopy;
+}
 
 + (NSMutableArray *) jy_getAllAddressInfoWithSubAddrs:(NSArray *)array sqliteName:(NSString *)sqliteName{
     if (array.count == 0) {
@@ -38,7 +50,7 @@
 + (NSMutableArray *)jy_getAddressInfoWithSqliteName:(NSString *)sqliteName code:(NSString*)code conditional:(NSString *)conditional{
     NSMutableArray * areas = [NSMutableArray array];
     if (sqliteName == nil || [sqliteName isEqualToString:@""]) {
-        sqliteName = @"jyarea";// 本地数据表
+        sqliteName = @"jyAddress";// 本地数据表
     }
 
     if ([code isEqualToString:@""] ||

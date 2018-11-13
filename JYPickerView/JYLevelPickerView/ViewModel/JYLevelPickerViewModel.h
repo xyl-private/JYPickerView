@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JYLevelPickerViewModel : NSObject
+
++ (NSMutableArray *) jy_getAllAddressDataSourceWithSqliteName:(NSString *)sqliteName;
+
 + (NSMutableArray *) jy_getAllAddressInfoWithSubAddrs:(NSArray *)array sqliteName:(NSString *)sqliteName;
 
 + (NSMutableArray *) jy_getAddressInfoWithSqliteName:(NSString *)sqliteName code:(NSString*)code conditional:(NSString *)conditional;

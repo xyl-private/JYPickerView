@@ -12,7 +12,7 @@
 		7B050B612199173F00AE0D35 /* JYLevelPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */; };
 		7B050B862199634600AE0D35 /* JYLevelPickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B852199634600AE0D35 /* JYLevelPickerToolBarView.m */; };
 		7B050B8A219A665600AE0D35 /* JYLevelPickerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B89219A665600AE0D35 /* JYLevelPickerViewModel.m */; };
-		7B050B8B219A6D5200AE0D35 /* jyarea.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7B050B87219A619200AE0D35 /* jyarea.sqlite */; };
+		7B050B8B219A6D5200AE0D35 /* jyAddress.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7B050B87219A619200AE0D35 /* jyAddress.sqlite */; };
 		7B050B8E219A787400AE0D35 /* JYLevelAddrPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B8D219A787400AE0D35 /* JYLevelAddrPickerModel.m */; };
 		7B050B91219A7B7A00AE0D35 /* JYPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B050B90219A7B7A00AE0D35 /* JYPickerModel.m */; };
 		7B0C9402219590F0005D7200 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C9401219590F0005D7200 /* AppDelegate.m */; };
@@ -34,7 +34,7 @@
 		7B050B5D2199173F00AE0D35 /* JYLevelPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerModel.m; sourceTree = "<group>"; };
 		7B050B842199634600AE0D35 /* JYLevelPickerToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerToolBarView.h; sourceTree = "<group>"; };
 		7B050B852199634600AE0D35 /* JYLevelPickerToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerToolBarView.m; sourceTree = "<group>"; };
-		7B050B87219A619200AE0D35 /* jyarea.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyarea.sqlite; sourceTree = "<group>"; };
+		7B050B87219A619200AE0D35 /* jyAddress.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyAddress.sqlite; sourceTree = "<group>"; };
 		7B050B88219A665600AE0D35 /* JYLevelPickerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYLevelPickerViewModel.h; sourceTree = "<group>"; };
 		7B050B89219A665600AE0D35 /* JYLevelPickerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYLevelPickerViewModel.m; sourceTree = "<group>"; };
 		7B050B8C219A787400AE0D35 /* JYLevelAddrPickerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYLevelAddrPickerModel.h; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		7B050B95219A7DA800AE0D35 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				7B050B87219A619200AE0D35 /* jyarea.sqlite */,
+				7B050B87219A619200AE0D35 /* jyAddress.sqlite */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B050B8B219A6D5200AE0D35 /* jyarea.sqlite in Resources */,
+				7B050B8B219A6D5200AE0D35 /* jyAddress.sqlite in Resources */,
 				7B0C940D219590F1005D7200 /* LaunchScreen.storyboard in Resources */,
 				7B0C940A219590F1005D7200 /* Assets.xcassets in Resources */,
 				7B0C9408219590F0005D7200 /* Main.storyboard in Resources */,
