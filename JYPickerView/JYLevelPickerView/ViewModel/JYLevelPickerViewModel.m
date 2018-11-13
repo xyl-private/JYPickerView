@@ -29,11 +29,19 @@
         array = [JYLevelPickerViewModel jy_getAddressInfoWithSqliteName:sqliteName code:@"0" conditional:@"parentId"];
     }
     NSMutableArray * mArr = [NSMutableArray array];
-    for (NSDictionary * dic in array) {
-        NSArray * subArray = [JYLevelPickerViewModel jy_getAddressInfoWithSqliteName:sqliteName code:dic[@"areaCode"] conditional:@"parentId"];
-        NSMutableDictionary * mDic = [dic mutableCopy];
-        if (subArray.count > 0) {
-            mDic[@"dataList"] = [JYLevelPickerViewModel jy_getAllAddressInfoWithSubAddrs:subArray sqliteName:sqliteName];
+    for (NSDictionary * cityDic in array) {
+        NSArray * cityArray = [JYLevelPickerViewModel jy_getAddressInfoWithSqliteName:sqliteName code:cityDic[@"areaCode"] conditional:@"parentId"];
+        NSMutableDictionary * mDic = [cityDic mutableCopy];
+        if (cityArray.count > 0) {
+            NSArray * countyArr = [JYLevelPickerViewModel jy_getAddressInfoWithSqliteName:sqliteName code:cityDic[@"areaCode"] conditional:@"parentId"];
+            NSMutableArray * countyMArr = [NSMutableArray array];
+            for (NSDictionary * countyDic in countyArr) {
+                NSArray * areaArray = [JYLevelPickerViewModel jy_getAddressInfoWithSqliteName:sqliteName code:countyDic[@"areaCode"] conditional:@"parentId"];
+                NSMutableDictionary * areaDic = [countyDic mutableCopy];
+                areaDic[@"dataList"] = areaArray;
+                [countyMArr addObject:areaDic];
+            }
+            mDic[@"dataList"] = countyMArr;
         }
         [mArr addObject:mDic];
     }

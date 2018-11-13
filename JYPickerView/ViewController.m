@@ -37,25 +37,15 @@
 
 - (IBAction)addrAction:(id)sender {
     __weak typeof(self) weakSelf = self;
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // 执⾏耗时的异步操作...
-        NSArray * arr = [JYLevelPickerViewModel jy_getAllAddressDataSourceWithSqliteName:@"jyAddress"];
-        if (arr.count == 0) {
-            NSLog(@"数据获取失败");
-            return ;
-        }
-        NSArray * models = [NSArray yy_modelArrayWithClass:[JYLevelAddrPickerModel class] json:arr];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // 回到主线程,执⾏UI刷新操作
-            [JYLevelPickerView jy_initPickviewWithDataSourcesArray:models level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
-                pickerView.defaultCode = self.addrCode;
-                pickerView.pickerToolBarView.titleText = @"地址选择器";
-            } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
-                weakSelf.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName,lastModel.dataCode];
-                weakSelf.addrCode = lastModel.dataCode;
-            }];
-        });
-    });
+    NSArray * arr = [JYLevelPickerViewModel jy_getAllAddressDataSourceWithSqliteName:@"jyAddress"];
+    NSArray * models = [NSArray yy_modelArrayWithClass:[JYLevelAddrPickerModel class] json:arr];
+    [JYLevelPickerView jy_initPickviewWithDataSourcesArray:models level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
+        pickerView.defaultCode = self.addrCode;
+        pickerView.pickerToolBarView.titleText = @"地址选择器";
+    } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
+        weakSelf.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName,lastModel.dataCode];
+        weakSelf.addrCode = lastModel.dataCode;
+    }];
 }
 
 
