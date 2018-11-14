@@ -55,17 +55,17 @@ extern JYDatePickerComponentsStyle const kJYDatePickerComponentsStyleMS;
 /**
  最小时间
  */
-@property (nonatomic, strong) NSDate *minLimitDate;
+@property (nonatomic, strong) NSDate *minimumDate;
 
 /**
  最大时间
  */
-@property (nonatomic, strong) NSDate *maxLimitDate;
+@property (nonatomic, strong) NSDate *maximumDate;
 
 /**
  选中时间,定位
  */
-@property (nonatomic, strong) NSDate *selectDate;
+@property (nonatomic, strong) NSDate *defaultDate;
 
 /** picker Tool Bar View */
 @property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;

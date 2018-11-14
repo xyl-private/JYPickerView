@@ -98,9 +98,9 @@ static CGFloat const kConfirmBtnHeight = 44;
 
 @implementation JYDatePickerView{
 @private
-    NSDate *_selectDate;
-    NSDate *_minLimitDate;
-    NSDate *_maxLimitDate;
+    NSDate *_defaultDate;
+    NSDate *_minimumDate;
+    NSDate *_maximumDate;
     NSMutableArray<NSNumber *> *_optionArray;
 }
 
@@ -141,7 +141,7 @@ static CGFloat const kConfirmBtnHeight = 44;
 
 - (void)didConfirm{
     if (nil != _confirmBlock) {
-        _confirmBlock(_selectDate);
+        _confirmBlock(_defaultDate);
     }
     [self dismiss];
 }
@@ -159,7 +159,7 @@ static CGFloat const kConfirmBtnHeight = 44;
         }
         wSelf.needReload = NO;
         
-        NSDate *date = wSelf.selectDate;
+        NSDate *date = wSelf.defaultDate;
         
         NSMutableArray *yearArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionYear];
         NSMutableArray *monthArray = [wSelf unitArrayForOption:kJYDatePickerComponentsOptionMonth];
@@ -174,8 +174,8 @@ static CGFloat const kConfirmBtnHeight = 44;
         [minuteArray removeAllObjects];
         [secondArray removeAllObjects];
         
-        NSInteger minYear = wSelf.minLimitDate.year;
-        NSInteger maxYear = wSelf.maxLimitDate.year;
+        NSInteger minYear = wSelf.minimumDate.year;
+        NSInteger maxYear = wSelf.maximumDate.year;
         for (NSInteger i = minYear; i <= maxYear; ++i) {
             [yearArray addObject:@(i)];
         }
@@ -186,15 +186,15 @@ static CGFloat const kConfirmBtnHeight = 44;
         NSInteger minMinute = 0;
         NSInteger minSecond = 0;
         if (date.year == minYear) {
-            minMonth = wSelf.minLimitDate.month;
+            minMonth = wSelf.minimumDate.month;
             if (date.month == minMonth) {
-                minDay = wSelf.minLimitDate.day;
+                minDay = wSelf.minimumDate.day;
                 if (date.day == minDay) {
-                    minHour = wSelf.minLimitDate.hour;
+                    minHour = wSelf.minimumDate.hour;
                     if (date.hour == minHour) {
-                        minMinute = wSelf.minLimitDate.minute;
+                        minMinute = wSelf.minimumDate.minute;
                         if (date.minute == minMinute) {
-                            minSecond = wSelf.minLimitDate.seconds;
+                            minSecond = wSelf.minimumDate.seconds;
                         }
                     }
                 }
@@ -210,15 +210,15 @@ static CGFloat const kConfirmBtnHeight = 44;
         NSInteger maxMinute = 59;
         NSInteger maxSecond = 59;
         if (date.year == maxYear) {
-            maxMonth = wSelf.maxLimitDate.month;
+            maxMonth = wSelf.maximumDate.month;
             if (date.month == maxMonth) {
-                maxDay = wSelf.maxLimitDate.day;
+                maxDay = wSelf.maximumDate.day;
                 if (date.day == maxDay) {
-                    maxHour = wSelf.maxLimitDate.hour;
+                    maxHour = wSelf.maximumDate.hour;
                     if (date.hour == maxHour) {
-                        maxMinute = wSelf.maxLimitDate.minute;
+                        maxMinute = wSelf.maximumDate.minute;
                         if (date.minute == maxMinute) {
-                            maxSecond = wSelf.maxLimitDate.seconds;
+                            maxSecond = wSelf.maximumDate.seconds;
                         }
                     }
                 }
@@ -343,12 +343,12 @@ static CGFloat const kConfirmBtnHeight = 44;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSInteger year = _selectDate.year;
-    NSInteger month = _selectDate.month;
-    NSInteger day = _selectDate.day;
-    NSInteger hour = _selectDate.hour;
-    NSInteger minute = _selectDate.minute;
-    NSInteger second = _selectDate.seconds;
+    NSInteger year = _defaultDate.year;
+    NSInteger month = _defaultDate.month;
+    NSInteger day = _defaultDate.day;
+    NSInteger hour = _defaultDate.hour;
+    NSInteger minute = _defaultDate.minute;
+    NSInteger second = _defaultDate.seconds;
     JYDatePickerComponentsOption option = self.optionArray[component].integerValue;
     NSInteger num = [self unitArrayForOption:option][row].integerValue;
     switch (option) {
@@ -377,7 +377,7 @@ static CGFloat const kConfirmBtnHeight = 44;
     NSRange days = [NSCalendar.currentCalendar rangeOfUnit:NSCalendarUnitDay
                                                     inUnit:NSCalendarUnitMonth
                                                    forDate:date];
-    self.selectDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd:%zd", year, month, MIN(day, days.length), hour, minute,second] format:@"yyyy-MM-dd HH:mm:ss"];
+    self.defaultDate = [NSDate dateWithStr:[NSString stringWithFormat:@"%zd-%zd-%zd %zd:%zd:%zd", year, month, MIN(day, days.length), hour, minute,second] format:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 #pragma mark - 懒加载
@@ -419,53 +419,53 @@ static CGFloat const kConfirmBtnHeight = 44;
     return _pickerToolBarView;
 }
 
-- (NSDate *)minLimitDate {
-    if (nil == _minLimitDate) {
-        _minLimitDate = [NSDate dateWithStr:@"1900-01-01 00:00:00" format:@"yyyy-MM-dd HH:mm:ss"];
+- (NSDate *)minimumDate {
+    if (nil == _minimumDate) {
+        _minimumDate = [NSDate dateWithStr:@"1900-01-01 00:00:00" format:@"yyyy-MM-dd HH:mm:ss"];
     }
-    return _minLimitDate;
+    return _minimumDate;
 }
 
-- (void)setMinLimitDate:(NSDate *)minLimitDate {
-    if (nil != _minLimitDate || ![_minLimitDate isEqualToDate:minLimitDate]) {
-        _minLimitDate = minLimitDate;
+- (void)setMinimumDate:(NSDate *)minimumDate {
+    if (nil != _minimumDate || ![_minimumDate isEqualToDate:minimumDate]) {
+        _minimumDate = minimumDate;
         [self setNeedReload];
     }
-    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
+    NSParameterAssert(nil == _minimumDate || nil == _maximumDate || [_minimumDate isEarlierThanDate:_maximumDate]);
 }
 
-- (NSDate *)maxLimitDate {
-    if (nil == _maxLimitDate) {
-        _maxLimitDate = [NSDate dateWithStr:@"2099-12-31 23:59:59" format:@"yyyy-MM-dd HH:mm:ss"];
+- (NSDate *)maximumDate {
+    if (nil == _maximumDate) {
+        _maximumDate = [NSDate dateWithStr:@"2099-12-31 23:59:59" format:@"yyyy-MM-dd HH:mm:ss"];
     }
-    return _maxLimitDate;
+    return _maximumDate;
 }
 
-- (void)setMaxLimitDate:(NSDate *)maxLimitDate {
-    if (nil == _maxLimitDate || ![_maxLimitDate isEqualToDate:maxLimitDate]) {
-        _maxLimitDate = maxLimitDate;
+- (void)setMaximumDate:(NSDate *)maximumDate {
+    if (nil == _maximumDate || ![_maximumDate isEqualToDate:maximumDate]) {
+        _maximumDate = maximumDate;
         [self setNeedReload];
     }
-    NSParameterAssert(nil == _minLimitDate || nil == _maxLimitDate || [_minLimitDate isEarlierThanDate:_maxLimitDate]);
+    NSParameterAssert(nil == _minimumDate || nil == _maximumDate || [_minimumDate isEarlierThanDate:_maximumDate]);
 }
 
-- (void)setSelectDate:(NSDate *)selectDate {
-    if (nil == _selectDate || ![_selectDate isEqualToDate:selectDate]) {
-        _selectDate = selectDate;
+- (void)setDefaultDate:(NSDate *)defaultDate {
+    if (nil == _defaultDate || ![_defaultDate isEqualToDate:defaultDate]) {
+        _defaultDate = defaultDate;
         [self setNeedReload];
     }
 }
 
-- (NSDate *)selectDate {
-    if (nil == _selectDate) {
-        _selectDate = NSDate.date;
+- (NSDate *)defaultDate {
+    if (nil == _defaultDate) {
+        _defaultDate = NSDate.date;
     }
-    if ([_selectDate isEarlierThanDate:self.minLimitDate]) {
-        _selectDate = _minLimitDate;
-    } else if ([_selectDate isLaterThanDate:self.maxLimitDate]) {
-        _selectDate = _maxLimitDate;
+    if ([_defaultDate isEarlierThanDate:self.minimumDate]) {
+        _defaultDate = _minimumDate;
+    } else if ([_defaultDate isLaterThanDate:self.maximumDate]) {
+        _defaultDate = _maximumDate;
     }
-    return _selectDate;
+    return _defaultDate;
 }
 
 - (void)setStyle:(JYDatePickerComponentsStyle)style {

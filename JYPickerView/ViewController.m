@@ -54,12 +54,12 @@
     [JYDatePickerView jy_datePickerWithStyle:kJYDatePickerComponentsStyleYMDHMS configuration:^(JYDatePickerView *datePickerView) {
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
         df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        datePickerView.minLimitDate = [df dateFromString:@"2017-11-12 12:12:34"];
+        datePickerView.minimumDate = [df dateFromString:@"2017-11-12 12:12:34"];
         NSString * date = @"2028-11-12 1:22:59";
-        datePickerView.maxLimitDate = [df dateFromString:date];
+        datePickerView.maximumDate = [df dateFromString:date];
         NSDate * seleDate = [df dateFromString:@"2018-11-12 11:16:58"];
-        datePickerView.selectDate = seleDate;
-        datePickerView.isShowUnit = NO;
+        datePickerView.defaultDate = seleDate;
+        datePickerView.isShowUnit = YES;
 
         datePickerView.pickerToolBarView.titleText = @"时间选择器";
         datePickerView.pickerToolBarView.isShowLine = YES;

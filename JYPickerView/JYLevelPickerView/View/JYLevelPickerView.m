@@ -151,12 +151,10 @@ static const int DangerArea = 34;
             [pickerView reloadComponent:1];
             // 下一级默认回到第一条数据
             [self.pickerView selectRow:0 inComponent:1 animated:YES];
-            //[self pickerView:self.pickerView didSelectRow:0 inComponent:1];
             if (self.component > 2) {
                 //刷新 第三列数据
                 [pickerView reloadComponent:2];
                 [self.pickerView selectRow:0 inComponent:2 animated:YES];
-                //[self pickerView:self.pickerView didSelectRow:0 inComponent:2];
             }
         }
     }else if (component == 1 && self.component > 2){
@@ -164,8 +162,6 @@ static const int DangerArea = 34;
         [pickerView reloadComponent:2];
         // 下一级默认回到第一条数据
         [self.pickerView selectRow:0 inComponent:2 animated:YES];
-        //[self pickerView:self.pickerView didSelectRow:0 inComponent:2];
-
     }
 
     JYLevelPickerModel *pickerModel = self.pickerModels[self.secondRow];
