@@ -44,10 +44,11 @@ typedef void(^PickerToolBarViewBlock)(JYPickerToolBarViewButtonType type);
 /** toolbar 的背景色 */
 @property (nonatomic, strong) UIColor * toolbarBackgroundColor;
 
-/** 是否显示 下边的边界线 yes 显示  默认是NO 隐藏的*/
-@property (nonatomic, assign) BOOL isShowLine;
 /** 下边的边界线 的颜色 */
 @property (nonatomic, strong) UIColor * lineViewColor;
+/** 是否显示 下边的边界线 yes 显示  默认是NO 隐藏的*/
+@property (nonatomic, assign) BOOL isShowLine;
+
 
 - (instancetype)initWithFrame:(CGRect)frame didConfirmDate:(PickerToolBarViewBlock)confirmBlock;
 

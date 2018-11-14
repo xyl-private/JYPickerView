@@ -38,6 +38,9 @@ static const int DangerArea = 34;
 /** 回调 返回选中的数据 */
 @property (nonatomic, copy) LevelPickerChosseResultBlock resultModelBlock;
 
+/** picker Tool Bar View */
+@property (nonatomic, strong) JYLevelPickerToolBarView * pickerToolBarView;
+
 @end
 
 @implementation JYLevelPickerView
@@ -335,6 +338,66 @@ static const int DangerArea = 34;
 -(void)setContentTextColor:(UIColor *)contentTextColor{
     _contentTextColor = contentTextColor;
     [self.pickerView reloadAllComponents];
+}
+
+- (void)setTitleText:(NSString *)titleText{
+    _titleText = titleText;
+    self.pickerToolBarView.titleText = titleText;
+}
+
+- (void)setTitleTextColor:(UIColor *)titleTextColor{
+    _titleTextColor = titleTextColor;
+    self.pickerToolBarView.titleTextColor = titleTextColor;
+}
+
+- (void)setTitleTextFont:(UIFont *)titleTextFont{
+    _titleTextFont = titleTextFont;
+    self.pickerToolBarView.titleTextFont = titleTextFont;
+}
+
+- (void)setLeftTitleText:(NSString *)leftTitleText{
+    _leftTitleText = leftTitleText;
+    self.pickerToolBarView.leftTitleText = leftTitleText;
+}
+
+- (void)setLeftTextFont:(UIFont *)leftTextFont{
+    _leftTextFont = leftTextFont;
+    self.pickerToolBarView.leftTextFont = leftTextFont;
+}
+
+- (void)setLeftTextColor:(UIColor *)leftTextColor{
+    _leftTextColor = leftTextColor;
+    self.pickerToolBarView.leftTextColor = leftTextColor;
+}
+
+- (void)setRightTitleText:(NSString *)rightTitleText{
+    _rightTitleText = rightTitleText;
+    self.pickerToolBarView.rightTitleText = rightTitleText;
+}
+
+- (void)setRightTextFont:(UIFont *)rightTextFont{
+    _rightTextFont = rightTextFont;
+    self.pickerToolBarView.rightTextFont = rightTextFont;
+}
+
+- (void)setRightTextColor:(UIColor *)rightTextColor{
+    _rightTextColor = rightTextColor;
+    self.pickerToolBarView.rightTextColor = rightTextColor;
+}
+
+- (void)setToolbarBackgroundColor:(UIColor *)toolbarBackgroundColor{
+    _toolbarBackgroundColor = toolbarBackgroundColor;
+    self.pickerToolBarView.toolbarBackgroundColor = toolbarBackgroundColor;
+}
+
+- (void)setIsShowLine:(BOOL)isShowLine{
+    _isShowLine = isShowLine;
+    self.pickerToolBarView.isShowLine = isShowLine;
+}
+
+- (void)setLineViewColor:(UIColor *)lineViewColor{
+    _lineViewColor = lineViewColor;
+    self.pickerToolBarView.lineViewColor = lineViewColor;
 }
 
 -(void)dealloc{

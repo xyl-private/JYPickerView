@@ -93,6 +93,9 @@ static CGFloat const kConfirmBtnHeight = 44;
 /** Description */
 @property (nonatomic, strong) UIView *container;
 
+/** picker Tool Bar View */
+@property (nonatomic, strong) JYPickerToolBarView * pickerToolBarView;
+
 @end
 
 
@@ -504,6 +507,66 @@ static CGFloat const kConfirmBtnHeight = 44;
 
 -(void)setIsShowUnit:(BOOL)isShowUnit{
     _isShowUnit = isShowUnit;
+}
+
+- (void)setTitleText:(NSString *)titleText{
+    _titleText = titleText;
+    self.pickerToolBarView.titleText = titleText;
+}
+
+- (void)setTitleTextColor:(UIColor *)titleTextColor{
+    _titleTextColor = titleTextColor;
+    self.pickerToolBarView.titleTextColor = titleTextColor;
+}
+
+- (void)setTitleTextFont:(UIFont *)titleTextFont{
+    _titleTextFont = titleTextFont;
+    self.pickerToolBarView.titleTextFont = titleTextFont;
+}
+
+- (void)setLeftTitleText:(NSString *)leftTitleText{
+    _leftTitleText = leftTitleText;
+    self.pickerToolBarView.leftTitleText = leftTitleText;
+}
+
+- (void)setLeftTextFont:(UIFont *)leftTextFont{
+    _leftTextFont = leftTextFont;
+    self.pickerToolBarView.leftTextFont = leftTextFont;
+}
+
+- (void)setLeftTextColor:(UIColor *)leftTextColor{
+    _leftTextColor = leftTextColor;
+    self.pickerToolBarView.leftTextColor = leftTextColor;
+}
+
+- (void)setRightTitleText:(NSString *)rightTitleText{
+    _rightTitleText = rightTitleText;
+    self.pickerToolBarView.rightTitleText = rightTitleText;
+}
+
+- (void)setRightTextFont:(UIFont *)rightTextFont{
+    _rightTextFont = rightTextFont;
+    self.pickerToolBarView.rightTextFont = rightTextFont;
+}
+
+- (void)setRightTextColor:(UIColor *)rightTextColor{
+    _rightTextColor = rightTextColor;
+    self.pickerToolBarView.rightTextColor = rightTextColor;
+}
+
+- (void)setToolbarBackgroundColor:(UIColor *)toolbarBackgroundColor{
+    _toolbarBackgroundColor = toolbarBackgroundColor;
+    self.pickerToolBarView.toolbarBackgroundColor = toolbarBackgroundColor;
+}
+
+- (void)setIsShowLine:(BOOL)isShowLine{
+    _isShowLine = isShowLine;
+    self.pickerToolBarView.isShowLine = isShowLine;
+}
+
+- (void)setLineViewColor:(UIColor *)lineViewColor{
+    _lineViewColor = lineViewColor;
+    self.pickerToolBarView.lineViewColor = lineViewColor;
 }
 
 - (void)dealloc{

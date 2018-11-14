@@ -41,7 +41,7 @@
     NSArray * models = [NSArray yy_modelArrayWithClass:[JYLevelAddrPickerModel class] json:arr];
     [JYLevelPickerView jy_initPickviewWithDataSourcesArray:models level:JYLevelPickerViewLevelThree configuration:^(JYLevelPickerView * _Nonnull pickerView) {
         pickerView.defaultCode = self.addrCode;
-        pickerView.pickerToolBarView.titleText = @"地址选择器";
+        pickerView.titleText = @"地址选择器";
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
         weakSelf.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,resultModel.selectedChildModel.selectedChildModel.dataName,lastModel.dataCode];
         weakSelf.addrCode = lastModel.dataCode;
@@ -60,9 +60,7 @@
         NSDate * seleDate = [df dateFromString:@"2018-11-12 11:16:58"];
         datePickerView.defaultDate = seleDate;
         datePickerView.isShowUnit = YES;
-
-        datePickerView.pickerToolBarView.titleText = @"时间选择器";
-        datePickerView.pickerToolBarView.isShowLine = YES;
+        datePickerView.titleText = @"时间选择器";
     } resultDateBlock:^(NSDate *date) {
         NSDateFormatter * df = [[NSDateFormatter alloc] init ];
         df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -75,9 +73,9 @@
     NSArray * res = [NSArray yy_modelArrayWithClass:[JYLevelPickerModel class] json:[JYLevelPickerModel dataSource]];
     [JYLevelPickerView jy_initPickviewWithDataSourcesArray:res level:JYLevelPickerViewLevelTwo configuration:^(JYLevelPickerView * _Nonnull pickerView) {
         pickerView.defaultCode = weakSelf.addrCode;
-        pickerView.pickerToolBarView.titleText = @"地址选择器";
-        pickerView.pickerToolBarView.isShowLine = YES;
-        pickerView.pickerToolBarView.lineViewColor = [UIColor redColor];
+        pickerView.titleText = @"地址选择器";
+        pickerView.isShowLine = YES;
+        pickerView.lineViewColor = [UIColor redColor];
     } resultModelBlock:^(JYLevelPickerModel * _Nonnull resultModel, JYLevelPickerModel * _Nonnull lastModel) {
         self.addrLabel.text = [NSString stringWithFormat:@"%@ -> %@  -> code:%@",resultModel.dataName,resultModel.selectedChildModel.dataName,lastModel.dataCode];
         weakSelf.addrCode = lastModel.dataCode;
