@@ -147,24 +147,25 @@ static const int DangerArea = 34;
         // 获得第0列当前选中的行号
         self.secondRow = [self.pickerView selectedRowInComponent:0];
         if (self.component > 1) {// 当有两个层级的时候 才会调用这个  刷新下一个层级
-            // 下一级默认回到第一条数据
-            [self.pickerView selectRow:0 inComponent:1 animated:YES];
-            [self pickerView:self.pickerView didSelectRow:0 inComponent:1];
             //刷新 第二列数据
             [pickerView reloadComponent:1];
+            // 下一级默认回到第一条数据
+            [self.pickerView selectRow:0 inComponent:1 animated:YES];
+            //[self pickerView:self.pickerView didSelectRow:0 inComponent:1];
             if (self.component > 2) {
-                [self.pickerView selectRow:0 inComponent:2 animated:YES];
-                [self pickerView:self.pickerView didSelectRow:0 inComponent:2];
                 //刷新 第三列数据
                 [pickerView reloadComponent:2];
+                [self.pickerView selectRow:0 inComponent:2 animated:YES];
+                //[self pickerView:self.pickerView didSelectRow:0 inComponent:2];
             }
         }
     }else if (component == 1 && self.component > 2){
         self.thirdRow = [self.pickerView selectedRowInComponent:1];
+        [pickerView reloadComponent:2];
         // 下一级默认回到第一条数据
         [self.pickerView selectRow:0 inComponent:2 animated:YES];
-        [self pickerView:self.pickerView didSelectRow:0 inComponent:2];
-        [pickerView reloadComponent:2];
+        //[self pickerView:self.pickerView didSelectRow:0 inComponent:2];
+
     }
 
     JYLevelPickerModel *pickerModel = self.pickerModels[self.secondRow];
