@@ -340,7 +340,8 @@ static CGFloat const kConfirmBtnHeight = 44;
     }
 
     NSArray *arry = [self unitArrayForOption:option];
-    label.text = [NSString stringWithFormat:@"%@%@", arry[row], suffix];
+    NSString * num = arry[row];
+    label.text = [NSString stringWithFormat:@"%02d%@", num.intValue, suffix];
     
     return label;
 }
